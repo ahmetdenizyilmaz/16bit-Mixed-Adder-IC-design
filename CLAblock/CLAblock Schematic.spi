@@ -1,0 +1,73 @@
+*** SPICE deck for cell CLAblock{sch} from library 16BitAdder
+*** Created on Pzt Oca 07, 2019 19:00:40
+*** Last revised on Paz Oca 13, 2019 22:32:08
+*** Written on Paz Oca 13, 2019 22:36:57 by Electric VLSI Design System, version 9.07
+*** Layout tech: mocmos, foundry MOSIS
+*** UC SPICE *** , MIN_RESIST 4.0, MIN_CAPAC 0.1FF
+
+*** SUBCIRCUIT _16BitAdder__Inverter FROM CELL Inverter{sch}
+.SUBCKT _16BitAdder__Inverter Out Inp
+** GLOBAL gnd
+** GLOBAL vdd
+Mnmos@1 Out Inp gnd gnd NMOS L=0.6U W=1.8U
+Mpmos@1 vdd Inp Out vdd PMOS L=0.6U W=3.6U
+.ENDS _16BitAdder__Inverter
+
+*** SUBCIRCUIT _16BitAdder__Nand2Gate FROM CELL Nand2Gate{sch}
+.SUBCKT _16BitAdder__Nand2Gate Out Inp0 Inp1
+** GLOBAL gnd
+** GLOBAL vdd
+Mnmos@0 net@1 Inp1 gnd gnd NMOS L=0.6U W=3.6U
+Mnmos@1 Out Inp0 net@1 gnd NMOS L=0.6U W=3.6U
+Mpmos@0 vdd Inp1 Out vdd PMOS L=0.6U W=3.6U
+Mpmos@1 vdd Inp0 Out vdd PMOS L=0.6U W=3.6U
+.ENDS _16BitAdder__Nand2Gate
+
+*** SUBCIRCUIT _16BitAdder__And2Gate FROM CELL And2Gate{sch}
+.SUBCKT _16BitAdder__And2Gate Out Inp0 Inp1
+** GLOBAL gnd
+** GLOBAL vdd
+XInverter@1 Out net@8 _16BitAdder__Inverter
+XNand2Gat@0 net@8 Inp0 Inp1 _16BitAdder__Nand2Gate
+.ENDS _16BitAdder__And2Gate
+
+*** SUBCIRCUIT _16BitAdder__Nor2Gate FROM CELL Nor2Gate{sch}
+.SUBCKT _16BitAdder__Nor2Gate Out Inp0 Inp1
+** GLOBAL gnd
+** GLOBAL vdd
+Mnmos@0 Out Inp0 gnd gnd NMOS L=0.6U W=1.8U
+Mnmos@1 Out Inp1 gnd gnd NMOS L=0.6U W=1.8U
+Mpmos@0 net@11 Inp1 Out vdd PMOS L=0.6U W=3.6U
+Mpmos@1 vdd Inp0 net@11 vdd PMOS L=0.6U W=3.6U
+.ENDS _16BitAdder__Nor2Gate
+
+*** SUBCIRCUIT _16BitAdder__Or2Gate FROM CELL Or2Gate{sch}
+.SUBCKT _16BitAdder__Or2Gate Out Inp0 Inp1
+** GLOBAL gnd
+** GLOBAL vdd
+XInverter@0 Out net@0 _16BitAdder__Inverter
+XNor2Gate@0 net@0 Inp0 Inp1 _16BitAdder__Nor2Gate
+.ENDS _16BitAdder__Or2Gate
+
+.global gnd vdd
+
+*** TOP LEVEL CELL: CLAblock{sch}
+XAnd2Gate@0 PhlOut PlInp PhInp _16BitAdder__And2Gate
+XAnd2Gate@1 net@4 GlInp And2Gate@1_Inp1 _16BitAdder__And2Gate
+XAnd2Gate@2 net@18 ClInp PlInp _16BitAdder__And2Gate
+XOr2Gate@0 GhlOut net@4 GhInp _16BitAdder__Or2Gate
+XOr2Gate@1 ChOut net@18 GlInp _16BitAdder__Or2Gate
+
+* Spice Code nodes in cell cell 'CLAblock{sch}'
+vdd Vdd 0 DC 5
+vin GhInp 0 DC 5 pulse(0 5 10f 0.5f 0.5f 20n 40n)
+vin2 PhInp 0 DC 5 pulse(0 5 10f 0.5f 0.5f 40n 80n)
+vin3 GlInp 0 DC 5 pulse(0 5 10f 0.5f 0.5f 10n 20n)
+vin4 PlInp 0 DC 5 pulse(0 5 10f 0.5f 0.5f 30n 60n)
+vin5 ClInp 0 DC 5 pulse(0 5 10f 0.5f 0.5f 30n 60n)
+
+cload Clout 0 50fF
+.tran 100ns
+.include C5_models.txt
+.END
+.END

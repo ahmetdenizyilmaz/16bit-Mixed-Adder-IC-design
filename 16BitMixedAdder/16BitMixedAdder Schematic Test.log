@@ -1,0 +1,42 @@
+Circuit: *** SPICE deck for cell 16BitMixedAdder{sch} from library 16BitAdder
+
+Ignoring BSIM parameter XL
+Ignoring BSIM parameter XW
+Ignoring BSIM parameter XL
+Ignoring BSIM parameter XW
+WARNING: Node _8BITCLAA@0:CLABLOCK@0:AND2GATE@1_INP1 is floating.
+WARNING: Node _8BITCLAA@0:CLABLOCK@1:AND2GATE@1_INP1 is floating.
+WARNING: Node _8BITCLAA@0:CLABLOCK@2:AND2GATE@1_INP1 is floating.
+WARNING: Node _8BITCLAA@0:CLABLOCK@3:AND2GATE@1_INP1 is floating.
+WARNING: Node _8BITCLAA@0:CLABLOCK@4:AND2GATE@1_INP1 is floating.
+WARNING: Node _8BITCLAA@0:CLABLOCK@5:AND2GATE@1_INP1 is floating.
+WARNING: Node _8BITCLAA@0:CLABLOCK@6:AND2GATE@1_INP1 is floating.
+
+Warning: Pd = 0 is less than W.
+Warning: Ps = 0 is less than W.
+Warning: Pd = 0 is less than W.
+Warning: Ps = 0 is less than W.
+Warning: Pd = 0 is less than W.
+Warning: Ps = 0 is less than W.
+Warning: Pd = 0 is less than W.
+Warning: Ps = 0 is less than W.
+Direct Newton iteration for .op point succeeded.
+
+Date: Mon Jan 14 01:43:55 2019
+Total elapsed time: 1.446 seconds.
+
+tnom = 27
+temp = 27
+method = modified trap
+totiter = 2119
+traniter = 2083
+tranpoints = 1042
+accept = 1042
+rejected = 0
+matrix size = 555
+fillins = 504
+solver = Normal
+Thread vector: 925.9/276.0[8] 407.2/52.6[8] 70.8/26.7[8] 6.4/6.8[1]  2592/500
+Matrix Compiler1: 96.40 KB object code size  68.1/37.4/[13.0]
+Matrix Compiler2: 78.81 KB object code size  27.0/33.4/[8.0]
+
