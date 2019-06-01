@@ -1,0 +1,22 @@
+*** SPICE deck for cell Nor2Gate{lay} from library 16BitAdder
+*** Created on Pzt Oca 07, 2019 17:27:35
+*** Last revised on Paz Oca 13, 2019 20:17:34
+*** Written on Paz Oca 13, 2019 20:17:37 by Electric VLSI Design System, version 9.07
+*** Layout tech: mocmos, foundry MOSIS
+*** UC SPICE *** , MIN_RESIST 4.0, MIN_CAPAC 0.1FF
+
+*** TOP LEVEL CELL: Nor2Gate{lay}
+Mnmos@0 Out Inp0 gnd gnd NMOS L=0.6U W=1.8U AS=4.095P AD=3.06P PS=9.9U PD=5.9U
+Mnmos@1 gnd Inp1 Out gnd NMOS L=0.6U W=1.8U AS=3.06P AD=4.095P PS=5.9U PD=9.9U
+Mpmos@0 net@24 Inp0 vdd vdd PMOS L=0.6U W=3.6U AS=8.19P AD=2.025P PS=16.5U PD=5.4U
+Mpmos@1 Out Inp1 net@24 vdd PMOS L=0.6U W=3.6U AS=2.025P AD=3.06P PS=5.4U PD=5.9U
+
+* Spice Code nodes in cell cell 'Nor2Gate{lay}'
+vdd Vdd 0 DC 5
+vin Inp0 0 DC 5 pulse(0 5 10f 0.5f 0.5f 20n 40n)
+vin2 Inp1 0 DC 5 pulse(0 5 10f 0.5f 0.5f 40n 80n)
+cload Out 0 50fF
+.tran 0 200ns
+.include C5_models.txt
+.END
+.END

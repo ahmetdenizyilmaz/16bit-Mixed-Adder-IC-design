@@ -1,0 +1,21 @@
+*** SPICE deck for cell Inverter{sch} from library 16BitAdder
+*** Created on Paz Oca 06, 2019 22:03:06
+*** Last revised on Paz Oca 13, 2019 20:00:12
+*** Written on Paz Oca 13, 2019 20:00:24 by Electric VLSI Design System, version 9.07
+*** Layout tech: mocmos, foundry MOSIS
+*** UC SPICE *** , MIN_RESIST 4.0, MIN_CAPAC 0.1FF
+
+.global gnd vdd
+
+*** TOP LEVEL CELL: Inverter{sch}
+Mnmos@1 Out Inp gnd gnd NMOS L=0.6U W=1.8U
+Mpmos@1 vdd Inp Out vdd PMOS L=0.6U W=3.6U
+
+* Spice Code nodes in cell cell 'Inverter{sch}'
+vdd Vdd 0 DC 5
+vin Inp 0 DC 5 pulse(0 5 10f 0.5f 0.5f 20n 40n)
+cload Out 0 50fF
+.tran 0 100ns
+.include C5_models.txt
+.END
+.END

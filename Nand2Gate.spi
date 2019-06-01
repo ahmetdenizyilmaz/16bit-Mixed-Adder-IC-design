@@ -1,0 +1,24 @@
+*** SPICE deck for cell Nand2Gate{sch} from library 16BitAdder
+*** Created on Sal Ara 19, 2000 02:56:42
+*** Last revised on Per Şub 14, 2019 23:14:27
+*** Written on Per Şub 14, 2019 23:14:42 by Electric VLSI Design System, version 9.07
+*** Layout tech: mocmos, foundry MOSIS
+*** UC SPICE *** , MIN_RESIST 4.0, MIN_CAPAC 0.1FF
+
+.global gnd vdd
+
+*** TOP LEVEL CELL: Nand2Gate{sch}
+Mnmos@0 net@1 Inp1 gnd gnd NMOS L=0.6U W=3.6U
+Mnmos@1 Out Inp0 net@1 gnd NMOS L=0.6U W=3.6U
+Mpmos@0 vdd Inp1 Out vdd PMOS L=0.6U W=3.6U
+Mpmos@1 vdd Inp0 Out vdd PMOS L=0.6U W=3.6U
+
+* Spice Code nodes in cell cell 'Nand2Gate{sch}'
+vdd Vdd 0 DC 5
+vin Inp0 0 DC 5 pulse(0 5 10f 0.5f 0.5f 20n 40n)
+vin2 Inp1 0 DC 5 pulse(0 5 10f 0.5f 0.5f 40n 80n)
+cload Out 0 50fF
+.tran 100ns
+.include C5_models.txt
+.END
+.END

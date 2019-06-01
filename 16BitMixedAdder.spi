@@ -1,0 +1,161 @@
+*** SPICE deck for cell 16BitMixedAdder{sch} from library 16BitAdder
+*** Created on Sal Oca 08, 2019 18:34:09
+*** Last revised on Pzt Oca 14, 2019 01:39:58
+*** Written on Per Şub 14, 2019 22:54:15 by Electric VLSI Design System, version 9.07
+*** Layout tech: mocmos, foundry MOSIS
+*** UC SPICE *** , MIN_RESIST 4.0, MIN_CAPAC 0.1FF
+
+*** SUBCIRCUIT _16BitAdder__Inverter FROM CELL Inverter{sch}
+.SUBCKT _16BitAdder__Inverter Out Inp
+** GLOBAL gnd
+** GLOBAL vdd
+Mnmos@1 Out Inp gnd gnd NMOS L=0.6U W=1.8U
+Mpmos@1 vdd Inp Out vdd PMOS L=0.6U W=3.6U
+.ENDS _16BitAdder__Inverter
+
+*** SUBCIRCUIT _16BitAdder__Nand2Gate FROM CELL Nand2Gate{sch}
+.SUBCKT _16BitAdder__Nand2Gate Out Inp0 Inp1
+** GLOBAL gnd
+** GLOBAL vdd
+Mnmos@0 net@1 Inp1 gnd gnd NMOS L=0.6U W=3.6U
+Mnmos@1 Out Inp0 net@1 gnd NMOS L=0.6U W=3.6U
+Mpmos@0 vdd Inp1 Out vdd PMOS L=0.6U W=3.6U
+Mpmos@1 vdd Inp0 Out vdd PMOS L=0.6U W=3.6U
+.ENDS _16BitAdder__Nand2Gate
+
+*** SUBCIRCUIT _16BitAdder__And2Gate FROM CELL And2Gate{sch}
+.SUBCKT _16BitAdder__And2Gate Out Inp0 Inp1
+** GLOBAL gnd
+** GLOBAL vdd
+XInverter@1 Out net@8 _16BitAdder__Inverter
+XNand2Gat@0 net@8 Inp0 Inp1 _16BitAdder__Nand2Gate
+.ENDS _16BitAdder__And2Gate
+
+*** SUBCIRCUIT _16BitAdder__Nor2Gate FROM CELL Nor2Gate{sch}
+.SUBCKT _16BitAdder__Nor2Gate Out Inp0 Inp1
+** GLOBAL gnd
+** GLOBAL vdd
+Mnmos@0 Out Inp0 gnd gnd NMOS L=0.6U W=1.8U
+Mnmos@1 Out Inp1 gnd gnd NMOS L=0.6U W=1.8U
+Mpmos@0 net@11 Inp1 Out vdd PMOS L=0.6U W=3.6U
+Mpmos@1 vdd Inp0 net@11 vdd PMOS L=0.6U W=3.6U
+.ENDS _16BitAdder__Nor2Gate
+
+*** SUBCIRCUIT _16BitAdder__Or2Gate FROM CELL Or2Gate{sch}
+.SUBCKT _16BitAdder__Or2Gate Out Inp0 Inp1
+** GLOBAL gnd
+** GLOBAL vdd
+XInverter@0 Out net@0 _16BitAdder__Inverter
+XNor2Gate@0 net@0 Inp0 Inp1 _16BitAdder__Nor2Gate
+.ENDS _16BitAdder__Or2Gate
+
+*** SUBCIRCUIT _16BitAdder__XorGate FROM CELL XorGate{sch}
+.SUBCKT _16BitAdder__XorGate Out Inp0 Inp1
+** GLOBAL gnd
+** GLOBAL vdd
+XNand2Gat@0 net@14 Inp0 net@0 _16BitAdder__Nand2Gate
+XNand2Gat@1 net@15 net@0 Inp1 _16BitAdder__Nand2Gate
+XNand2Gat@3 Out net@14 net@15 _16BitAdder__Nand2Gate
+XNand2Gat@4 net@0 Inp0 Inp1 _16BitAdder__Nand2Gate
+.ENDS _16BitAdder__XorGate
+
+*** SUBCIRCUIT _16BitAdder__1BitAdder FROM CELL 1BitAdder{sch}
+.SUBCKT _16BitAdder__1BitAdder Cin G0 P0 Sum Inp0 Inp1
+** GLOBAL gnd
+** GLOBAL vdd
+XAnd2Gate@0 G0 Inp0 Inp1 _16BitAdder__And2Gate
+XOr2Gate@0 P0 Inp0 Inp1 _16BitAdder__Or2Gate
+XXorGate@0 net@13 Inp0 Inp1 _16BitAdder__XorGate
+XXorGate@1 Sum net@13 Cin _16BitAdder__XorGate
+.ENDS _16BitAdder__1BitAdder
+
+*** SUBCIRCUIT _16BitAdder__CLAblock FROM CELL CLAblock{sch}
+.SUBCKT _16BitAdder__CLAblock ChOut ClInp GhlOut GhInp GlInp PhlOut PhInp PlInp
+** GLOBAL gnd
+** GLOBAL vdd
+XAnd2Gate@0 PhlOut PlInp PhInp _16BitAdder__And2Gate
+XAnd2Gate@1 net@4 GlInp And2Gate@1_Inp1 _16BitAdder__And2Gate
+XAnd2Gate@2 net@18 ClInp PlInp _16BitAdder__And2Gate
+XOr2Gate@0 GhlOut net@4 GhInp _16BitAdder__Or2Gate
+XOr2Gate@1 ChOut net@18 GlInp _16BitAdder__Or2Gate
+.ENDS _16BitAdder__CLAblock
+
+*** SUBCIRCUIT _16BitAdder__8BitCLAadder FROM CELL 8BitCLAadder{sch}
+.SUBCKT _16BitAdder__8BitCLAadder A0 A1 A2 A3 A4 A5 A6 A7 B0 B1 B2 B3 B4 B5 B6 B7 Cin S0 S1 S2 S3 S4 S5 S6 S7
+** GLOBAL gnd
+** GLOBAL vdd
+X_1BitAdde@0 net@2 net@0 net@1 S7 A7 B7 _16BitAdder__1BitAdder
+X_1BitAdde@1 net@5 net@9 net@11 S6 A6 B6 _16BitAdder__1BitAdder
+X_1BitAdde@2 net@17 net@15 net@16 S5 A5 B5 _16BitAdder__1BitAdder
+X_1BitAdde@3 net@8 net@24 net@26 S4 A4 B4 _16BitAdder__1BitAdder
+X_1BitAdde@4 net@32 net@30 net@31 S3 A3 B3 _16BitAdder__1BitAdder
+X_1BitAdde@5 net@37 net@33 net@35 S2 A2 B2 _16BitAdder__1BitAdder
+X_1BitAdde@6 net@45 net@43 net@44 S1 A1 B1 _16BitAdder__1BitAdder
+X_1BitAdde@7 Cin net@52 net@54 S0 A0 B0 _16BitAdder__1BitAdder
+XCLAblock@0 net@2 net@5 net@3 net@0 net@9 net@4 net@1 net@11 _16BitAdder__CLAblock
+XCLAblock@1 net@5 net@8 net@6 net@3 net@18 net@7 net@4 net@20 _16BitAdder__CLAblock
+XCLAblock@2 net@8 Cin CLAblock@2_GhlOut net@6 net@58 CLAblock@2_PhlOut net@7 net@60 _16BitAdder__CLAblock
+XCLAblock@3 net@17 net@8 net@18 net@15 net@24 net@20 net@16 net@26 _16BitAdder__CLAblock
+XCLAblock@4 net@32 net@37 net@40 net@30 net@33 net@41 net@31 net@35 _16BitAdder__CLAblock
+XCLAblock@5 net@37 Cin net@58 net@40 net@46 net@60 net@41 net@48 _16BitAdder__CLAblock
+XCLAblock@6 net@45 Cin net@46 net@43 net@52 net@48 net@44 net@54 _16BitAdder__CLAblock
+.ENDS _16BitAdder__8BitCLAadder
+
+*** SUBCIRCUIT _16BitAdder__Nand3Gate FROM CELL Nand3Gate{sch}
+.SUBCKT _16BitAdder__Nand3Gate Out Inp0 Inp1 Inp2
+** GLOBAL gnd
+** GLOBAL vdd
+Mnmos@0 net@20 Inp0 gnd gnd NMOS L=0.6U W=5.4U
+Mnmos@1 net@21 Inp1 net@20 gnd NMOS L=0.6U W=5.4U
+Mnmos@2 Out Inp2 net@21 gnd NMOS L=0.6U W=5.4U
+Mpmos@0 vdd Inp0 Out vdd PMOS L=0.6U W=3.6U
+Mpmos@1 vdd Inp1 Out vdd PMOS L=0.6U W=3.6U
+Mpmos@2 vdd Inp2 Out vdd PMOS L=0.6U W=3.6U
+.ENDS _16BitAdder__Nand3Gate
+
+*** SUBCIRCUIT _16BitAdder__1BitFA FROM CELL 1BitFA{sch}
+.SUBCKT _16BitAdder__1BitFA Cin Cout Sum Inp0 Inp1
+** GLOBAL gnd
+** GLOBAL vdd
+XNand2Gat@0 net@0 Inp0 Inp1 _16BitAdder__Nand2Gate
+XNand2Gat@1 net@2 Inp0 Cin _16BitAdder__Nand2Gate
+XNand2Gat@2 net@3 Inp1 Cin _16BitAdder__Nand2Gate
+XNand3Gat@0 Cout net@0 net@2 net@3 _16BitAdder__Nand3Gate
+XXorGate@0 net@8 Inp0 Inp1 _16BitAdder__XorGate
+XXorGate@1 Sum net@8 Cin _16BitAdder__XorGate
+.ENDS _16BitAdder__1BitFA
+
+*** SUBCIRCUIT _16BitAdder__4bitFA FROM CELL 4bitFA{sch}
+.SUBCKT _16BitAdder__4bitFA A0 A1 A2 A3 B0 B1 B2 B3 Cin Cout S0 S1 S2 S3
+** GLOBAL gnd
+** GLOBAL vdd
+Rres@2 gnd Cin 100k
+X_1BitFA@8 net@52 Cout S3 A3 B3 _16BitAdder__1BitFA
+X_1BitFA@9 net@57 net@52 S2 A2 B2 _16BitAdder__1BitFA
+X_1BitFA@10 net@64 net@57 S1 A1 B1 _16BitAdder__1BitFA
+X_1BitFA@11 Cin net@64 S0 A0 B0 _16BitAdder__1BitFA
+.ENDS _16BitAdder__4bitFA
+
+*** SUBCIRCUIT _16BitAdder__8BitFA FROM CELL 8BitFA{sch}
+.SUBCKT _16BitAdder__8BitFA A0 A1 A2 A3 A4 A5 A6 A7 B0 B1 B2 B3 B4 B5 B6 B7 Cin Cout S0 S1 S2 S3 S4 S5 S6 S7
+** GLOBAL gnd
+** GLOBAL vdd
+X_4bitFA@0 A0 A1 A2 A3 B0 B1 B2 B3 Cin net@1 S0 S1 S2 S3 _16BitAdder__4bitFA
+X_4bitFA@1 A4 A5 A6 A7 B4 B5 B6 B7 net@1 Cout S4 S5 S6 S7 _16BitAdder__4bitFA
+.ENDS _16BitAdder__8BitFA
+
+.global gnd vdd
+
+*** TOP LEVEL CELL: 16BitMixedAdder{sch}
+X_8BitCLAa@0 A8 A9 A10 A11 A12 A13 A14 A15 B8 B9 B10 B11 B12 B13 B14 B15 net@0 S8 S9 S10 S11 S12 S13 S14 S15 _16BitAdder__8BitCLAadder
+X_8BitFA@0 A0 A1 A2 A3 A4 A5 A6 A7 B0 B1 B2 B3 B4 B5 B6 B7 _8BitFA@0_Cin net@0 S0 S1 S2 S3 S4 S5 S6 S7 _16BitAdder__8BitFA
+
+* Spice Code nodes in cell cell '16BitMixedAdder{sch}'
+vdd Vdd 0 DC 5
+vin Inp0 0 DC 5 pulse(0 5 10f 0.5f 0.5f 20n 40n)
+vin2 Inp1 0 DC 5 pulse(0 5 10f 0.5f 0.5f 40n 80n)
+cload Out 0 50fF
+.tran 100ns
+.include C5_models.txt
+.END
+.END

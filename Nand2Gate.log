@@ -1,0 +1,7 @@
+Circuit: *** SPICE deck for cell Nand2Gate{sch} from library 16BitAdder
+
+Ignoring BSIM parameter XL
+Ignoring BSIM parameter XW
+Ignoring BSIM parameter XL
+Ignoring BSIM parameter XW
+Fatal Error: Run: Missing node(s).

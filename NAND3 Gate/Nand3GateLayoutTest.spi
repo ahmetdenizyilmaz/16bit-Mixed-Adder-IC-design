@@ -1,0 +1,25 @@
+*** SPICE deck for cell Nand3Gate{lay} from library 16BitAdder
+*** Created on Çar Ara 20, 2000 23:56:15
+*** Last revised on Paz Oca 13, 2019 19:17:33
+*** Written on Paz Oca 13, 2019 19:38:23 by Electric VLSI Design System, version 9.07
+*** Layout tech: mocmos, foundry MOSIS
+*** UC SPICE *** , MIN_RESIST 4.0, MIN_CAPAC 0.1FF
+
+*** TOP LEVEL CELL: Nand3Gate{lay}
+Mnmos@0 Out Inp2 net@18 gnd NMOS L=0.6U W=5.4U AS=2.7P AD=5.333P PS=6.9U PD=8.85U
+Mnmos@1 net@19 Inp0 gnd gnd NMOS L=0.6U W=5.4U AS=11.16P AD=2.835P PS=20.1U PD=7.2U
+Mnmos@2 net@18 Inp1 net@19 gnd NMOS L=0.6U W=5.4U AS=2.835P AD=2.7P PS=7.2U PD=6.9U
+Mpmos@0 Out Inp2 vdd vdd PMOS L=0.6U W=3.6U AS=5.04P AD=5.333P PS=9.3U PD=8.85U
+Mpmos@1 vdd Inp1 Out vdd PMOS L=0.6U W=3.6U AS=5.333P AD=5.04P PS=8.85U PD=9.3U
+Mpmos@2 Out Inp0 vdd vdd PMOS L=0.6U W=3.6U AS=5.04P AD=5.333P PS=9.3U PD=8.85U
+
+* Spice Code nodes in cell cell 'Nand3Gate{lay}'
+vdd Vdd 0 DC 5
+vin Inp0 0 DC 5 pulse(0 5 10f 0.5f 0.5f 10n 20n)
+vin2 Inp1 0 DC 5 pulse(0 5 10f 0.5f 0.5f 20n 40n)
+vin3 Inp2 0 DC 5 pulse(0 5 10f 0.5f 0.5f 40n 80n)
+cload Out 0 50fF
+.tran 0 100ns
+.include C5_models.txt
+.END
+.END

@@ -1,0 +1,25 @@
+Circuit: *** SPICE deck for cell Nor2Gate{lay} from library 16BitAdder
+
+Ignoring BSIM parameter XL
+Ignoring BSIM parameter XW
+Ignoring BSIM parameter XL
+Ignoring BSIM parameter XW
+Direct Newton iteration for .op point succeeded.
+
+Date: Sun Jan 13 20:18:11 2019
+Total elapsed time: 0.167 seconds.
+
+tnom = 27
+temp = 27
+method = modified trap
+totiter = 3370
+traniter = 3361
+tranpoints = 1521
+accept = 1457
+rejected = 64
+matrix size = 8
+fillins = 0
+solver = Normal
+Matrix Compiler1:      17 opcodes  0.1/[0.0]/0.1
+Matrix Compiler2: off  [0.1]/0.1/0.2
+

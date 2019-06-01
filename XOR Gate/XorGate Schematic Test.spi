@@ -1,0 +1,34 @@
+*** SPICE deck for cell XorGate{sch} from library 16BitAdder
+*** Created on Paz Oca 06, 2019 22:54:32
+*** Last revised on Paz Oca 13, 2019 21:01:24
+*** Written on Paz Oca 13, 2019 21:02:42 by Electric VLSI Design System, version 9.07
+*** Layout tech: mocmos, foundry MOSIS
+*** UC SPICE *** , MIN_RESIST 4.0, MIN_CAPAC 0.1FF
+
+*** SUBCIRCUIT _16BitAdder__Nand2Gate FROM CELL Nand2Gate{sch}
+.SUBCKT _16BitAdder__Nand2Gate Out Inp0 Inp1
+** GLOBAL gnd
+** GLOBAL vdd
+Mnmos@0 net@1 Inp1 gnd gnd NMOS L=0.6U W=3.6U
+Mnmos@1 Out Inp0 net@1 gnd NMOS L=0.6U W=3.6U
+Mpmos@0 vdd Inp1 Out vdd PMOS L=0.6U W=3.6U
+Mpmos@1 vdd Inp0 Out vdd PMOS L=0.6U W=3.6U
+.ENDS _16BitAdder__Nand2Gate
+
+.global gnd vdd
+
+*** TOP LEVEL CELL: XorGate{sch}
+XNand2Gat@0 net@14 Inp0 net@0 _16BitAdder__Nand2Gate
+XNand2Gat@1 net@15 net@0 Inp1 _16BitAdder__Nand2Gate
+XNand2Gat@3 Out net@14 net@15 _16BitAdder__Nand2Gate
+XNand2Gat@4 net@0 Inp0 Inp1 _16BitAdder__Nand2Gate
+
+* Spice Code nodes in cell cell 'XorGate{sch}'
+vdd Vdd 0 DC 5
+vin Inp0 0 DC 5 pulse(0 5 10f 0.5f 0.5f 20n 40n)
+vin2 Inp1 0 DC 5 pulse(0 5 10f 0.5f 0.5f 40n 80n)
+cload Out 0 50fF
+.tran 100ns
+.include C5_models.txt
+.END
+

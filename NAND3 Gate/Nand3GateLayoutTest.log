@@ -1,0 +1,25 @@
+Circuit: *** SPICE deck for cell Nand3Gate{lay} from library 16BitAdder
+
+Ignoring BSIM parameter XL
+Ignoring BSIM parameter XW
+Ignoring BSIM parameter XL
+Ignoring BSIM parameter XW
+Direct Newton iteration for .op point succeeded.
+
+Date: Sun Jan 13 19:56:01 2019
+Total elapsed time: 0.197 seconds.
+
+tnom = 27
+temp = 27
+method = modified trap
+totiter = 3594
+traniter = 3586
+tranpoints = 1582
+accept = 1502
+rejected = 80
+matrix size = 11
+fillins = 0
+solver = Normal
+Matrix Compiler1: 468 bytes object code size  0.3/0.1/[0.0]
+Matrix Compiler2:      74 opcodes  0.1/[0.1]/0.2
+

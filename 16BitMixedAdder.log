@@ -1,0 +1,107 @@
+Circuit: *** SPICE deck for cell 16BitMixedAdder{sch} from library 16BitAdder
+
+Ignoring BSIM parameter XL
+Ignoring BSIM parameter XW
+Ignoring BSIM parameter XL
+Ignoring BSIM parameter XW
+WARNING: Node B15 is floating.
+WARNING: Node A15 is floating.
+WARNING: Node B14 is floating.
+WARNING: Node A14 is floating.
+WARNING: Node B13 is floating.
+WARNING: Node A13 is floating.
+WARNING: Node B12 is floating.
+WARNING: Node A12 is floating.
+WARNING: Node B11 is floating.
+WARNING: Node A11 is floating.
+WARNING: Node B10 is floating.
+WARNING: Node A10 is floating.
+WARNING: Node B9 is floating.
+WARNING: Node A9 is floating.
+WARNING: Node B8 is floating.
+WARNING: Node A8 is floating.
+WARNING: Node _8BITCLAA@0:CLABLOCK@0:AND2GATE@1_INP1 is floating.
+WARNING: Node _8BITCLAA@0:CLABLOCK@1:AND2GATE@1_INP1 is floating.
+WARNING: Node _8BITCLAA@0:CLABLOCK@2:AND2GATE@1_INP1 is floating.
+WARNING: Node _8BITCLAA@0:CLABLOCK@3:AND2GATE@1_INP1 is floating.
+WARNING: Node _8BITCLAA@0:CLABLOCK@4:AND2GATE@1_INP1 is floating.
+WARNING: Node _8BITCLAA@0:CLABLOCK@5:AND2GATE@1_INP1 is floating.
+WARNING: Node _8BITCLAA@0:CLABLOCK@6:AND2GATE@1_INP1 is floating.
+WARNING: Node B3 is floating.
+WARNING: Node A3 is floating.
+WARNING: Node B2 is floating.
+WARNING: Node A2 is floating.
+WARNING: Node B1 is floating.
+WARNING: Node A1 is floating.
+WARNING: Node B0 is floating.
+WARNING: Node A0 is floating.
+WARNING: Node B7 is floating.
+WARNING: Node A7 is floating.
+WARNING: Node B6 is floating.
+WARNING: Node A6 is floating.
+WARNING: Node B5 is floating.
+WARNING: Node A5 is floating.
+WARNING: Node B4 is floating.
+WARNING: Node A4 is floating.
+WARNING: Node OUT is floating.
+
+WARNING: Less than two connections to node INP0.  This node is used by VIN.
+WARNING: Less than two connections to node INP1.  This node is used by VIN2.
+WARNING: Less than two connections to node OUT.  This node is used by CLOAD.
+Warning: Pd = 0 is less than W.
+Warning: Ps = 0 is less than W.
+Warning: Pd = 0 is less than W.
+Warning: Ps = 0 is less than W.
+Warning: Pd = 0 is less than W.
+Warning: Ps = 0 is less than W.
+Warning: Pd = 0 is less than W.
+Warning: Ps = 0 is less than W.
+Early termination of direct N-R iteration.
+Direct Newton iteration failed to find .op point.  (Use ".option noopiter" to skip.)
+Starting Gmin stepping
+Gmin = 10
+Gmin = 1.07374
+Gmin = 0.115292
+Gmin = 0.0123794
+Gmin = 0.00132923
+Gmin = 0.000142725
+Gmin = 1.5325e-005
+Gmin = 1.6455e-006
+Gmin = 1.76685e-007
+Gmin = 1.89714e-008
+Gmin = 2.03704e-009
+Gmin = 2.18725e-010
+Gmin = 2.34854e-011
+Gmin = 2.52173e-012
+Gmin = 2.70769e-013
+Gmin = 0
+Gmin stepping succeeded in finding the operating point.
+
+Heightened Def Con from 1e-016 to 1e-014
+Heightened Def Con from 1.005e-014 to 1.05e-014
+Heightened Def Con from 2e-008 to 2e-008
+Heightened Def Con from 2e-008 to 2e-008
+Heightened Def Con from 4e-008 to 4e-008
+Heightened Def Con from 4e-008 to 4e-008
+Heightened Def Con from 4e-008 to 4.01953e-008
+Heightened Def Con from 6e-008 to 6e-008
+Heightened Def Con from 8e-008 +to 8e-008
+
+Date: Thu Feb 14 22:58:59 2019
+Total elapsed time: 2.993 seconds.
+
+tnom = 27
+temp = 27
+method = modified trap
+totiter = 3309
+traniter = 2911
+tranpoints = 1176
+accept = 1130
+rejected = 56
+matrix size = 528
+fillins = 956
+solver = Normal
+Thread vector: 962.4/310.1[8] 414.3/53.5[8] 61.8/38.2[8] 8.1/5.2[7]  2592/500
+Matrix Compiler1: 145.22 KB object code size  84.4/52.2/[20.1]
+Matrix Compiler2: 84.56 KB object code size  35.1/36.8/[10.1]
+
