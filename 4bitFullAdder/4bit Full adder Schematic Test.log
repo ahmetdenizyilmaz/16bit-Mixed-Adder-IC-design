@@ -1,0 +1,32 @@
+Circuit: *** SPICE deck for cell 4bitFA{sch} from library 16BitAdder
+
+Ignoring BSIM parameter XL
+Ignoring BSIM parameter XW
+Ignoring BSIM parameter XL
+Ignoring BSIM parameter XW
+Warning: Pd = 0 is less than W.
+Warning: Ps = 0 is less than W.
+Warning: Pd = 0 is less than W.
+Warning: Ps = 0 is less than W.
+Warning: Pd = 0 is less than W.
+Warning: Ps = 0 is less than W.
+Direct Newton iteration for .op point succeeded.
+
+Date: Sun Jan 13 22:04:32 2019
+Total elapsed time: 0.555 seconds.
+
+tnom = 27
+temp = 27
+method = modified trap
+totiter = 2118
+traniter = 2082
+tranpoints = 1042
+accept = 1042
+rejected = 0
+matrix size = 119
+fillins = 52
+solver = Normal
+Thread vector: 197.7/82.2[8] 90.6/21.2[8] 16.6/9.4[8] 1.2/3.1[1]  2592/500
+Matrix Compiler1: 17.91 KB object code size  10.3/6.6/[3.5]
+Matrix Compiler2: 16.00 KB object code size  4.6/6.9/[1.3]
+

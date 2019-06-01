@@ -1,0 +1,64 @@
+*** SPICE deck for cell 1BitAdder{lay} from library 16BitAdder
+*** Created on Pzt Oca 07, 2019 18:13:18
+*** Last revised on Paz Oca 13, 2019 22:27:32
+*** Written on Paz Oca 13, 2019 22:28:27 by Electric VLSI Design System, version 9.07
+*** Layout tech: mocmos, foundry MOSIS
+*** UC SPICE *** , MIN_RESIST 4.0, MIN_CAPAC 0.1FF
+
+*** SUBCIRCUIT _16BitAdder__Inverter FROM CELL Inverter{lay}
+.SUBCKT _16BitAdder__Inverter gnd Out vdd Inp
+Mnmos@0 Out Inp gnd gnd NMOS L=0.6U W=1.8U AS=5.22P AD=4.455P PS=12.9U PD=8.7U
+Mpmos@0 Out Inp vdd vdd PMOS L=0.6U W=3.6U AS=8.19P AD=4.455P PS=16.5U PD=8.7U
+.ENDS _16BitAdder__Inverter
+
+*** SUBCIRCUIT _16BitAdder__Nand2Gate FROM CELL Nand2Gate{lay}
+.SUBCKT _16BitAdder__Nand2Gate gnd Out vdd Inp0 Inp1
+Mnmos@0 net@32 Inp0 gnd gnd NMOS L=0.6U W=3.6U AS=8.19P AD=1.89P PS=16.5U PD=5.1U
+Mnmos@1 Out Inp1 net@32 gnd NMOS L=0.6U W=3.6U AS=1.89P AD=4.14P PS=5.1U PD=7.1U
+Mpmos@0 vdd Inp1 Out vdd PMOS L=0.6U W=3.6U AS=4.14P AD=7.065P PS=7.1U PD=13.5U
+Mpmos@1 Out Inp0 vdd vdd PMOS L=0.6U W=3.6U AS=7.065P AD=4.14P PS=13.5U PD=7.1U
+.ENDS _16BitAdder__Nand2Gate
+
+*** SUBCIRCUIT _16BitAdder__And2Gate FROM CELL And2Gate{lay}
+.SUBCKT _16BitAdder__And2Gate gnd Out vdd Inp0 Inp1
+XInverter@0 gnd Out vdd net@2 _16BitAdder__Inverter
+XNand2Gat@0 gnd net@2 vdd Inp0 Inp1 _16BitAdder__Nand2Gate
+.ENDS _16BitAdder__And2Gate
+
+*** SUBCIRCUIT _16BitAdder__Nor2Gate FROM CELL Nor2Gate{lay}
+.SUBCKT _16BitAdder__Nor2Gate gnd Out vdd Inp0 Inp1
+Mnmos@0 Out Inp0 gnd gnd NMOS L=0.6U W=1.8U AS=4.095P AD=3.06P PS=9.9U PD=5.9U
+Mnmos@1 gnd Inp1 Out gnd NMOS L=0.6U W=1.8U AS=3.06P AD=4.095P PS=5.9U PD=9.9U
+Mpmos@0 net@24 Inp0 vdd vdd PMOS L=0.6U W=3.6U AS=8.19P AD=2.025P PS=16.5U PD=5.4U
+Mpmos@1 Out Inp1 net@24 vdd PMOS L=0.6U W=3.6U AS=2.025P AD=3.06P PS=5.4U PD=5.9U
+.ENDS _16BitAdder__Nor2Gate
+
+*** SUBCIRCUIT _16BitAdder__Or2Gate FROM CELL Or2Gate{lay}
+.SUBCKT _16BitAdder__Or2Gate gnd Out vdd Inp0 Inp1
+XInverter@2 gnd Out vdd net@8 _16BitAdder__Inverter
+XNor2Gate@0 gnd net@8 vdd Inp0 Inp1 _16BitAdder__Nor2Gate
+.ENDS _16BitAdder__Or2Gate
+
+*** SUBCIRCUIT _16BitAdder__XorGate FROM CELL XorGate{lay}
+.SUBCKT _16BitAdder__XorGate gnd Out vdd Inp0 Inp1
+XNand2Gat@0 gnd net@17 vdd Inp0 Inp1 _16BitAdder__Nand2Gate
+XNand2Gat@1 gnd net@23 vdd Inp0 net@17 _16BitAdder__Nand2Gate
+XNand2Gat@4 gnd net@27 vdd net@17 Inp1 _16BitAdder__Nand2Gate
+XNand2Gat@5 gnd Out vdd net@23 net@27 _16BitAdder__Nand2Gate
+.ENDS _16BitAdder__XorGate
+
+*** TOP LEVEL CELL: 1BitAdder{lay}
+XAnd2Gate@0 gnd G0 vdd Inp0 Inp1 _16BitAdder__And2Gate
+XOr2Gate@0 gnd P0 vdd Inp0 Inp1 _16BitAdder__Or2Gate
+XXorGate@0 gnd net@2 vdd Inp0 Inp1 _16BitAdder__XorGate
+XXorGate@1 gnd Sum vdd net@2 Cin _16BitAdder__XorGate
+
+* Spice Code nodes in cell cell '1BitAdder{lay}'
+vdd Vdd 0 DC 5
+vin Inp0 0 DC 5 pulse(0 5 10f 0.5f 0.5f 20n 40n)
+vin2 Inp1 0 DC 5 pulse(0 5 10f 0.5f 0.5f 40n 80n)
+cload Out 0 50fF
+.tran 100ns
+.include C5_models.txt
+.END
+.END
