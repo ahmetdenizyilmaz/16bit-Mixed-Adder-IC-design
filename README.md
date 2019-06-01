@@ -1,7 +1,7 @@
 # 16bit-Mixed-Adder-IC-design
 Integrated Cmos design of 16 bit adder 8bit full adder + 8 bit cla adder
 
-
+![imagepreview](https://github.com/ahmetdenizyilmaz/16bit-Mixed-Adder-IC-design/blob/master/Untitled.png)
 
 
 
